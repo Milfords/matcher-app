@@ -17,6 +17,9 @@ public class Payment {
 	@Column(name = "owner_id", nullable = false)
 	private UUID ownerId;
 	
+	@Column(name = "invoice_number")
+	private String invoiceNumber;
+	
 	private String accountNumber;
 	private String routingNumber;
 	private String remitterName;
@@ -43,6 +46,20 @@ public class Payment {
 		this.matchStatus = MatchStatus.UNMATCHED;
 	}
 	
+	//Constructor to create a payment with no invoice number
+	public Payment(UUID ownerId, String accountNumber, String routingNumber, String remitterName, BigDecimal paymentAmount, 
+				   String currency, String invoiceNumber) {
+		this.ownerId = ownerId;
+		this.accountNumber = accountNumber;
+		this.routingNumber = routingNumber;
+		this.remitterName = remitterName;
+		this.paymentAmount = paymentAmount;
+		this.currency = currency;
+		this.invoiceNumber = invoiceNumber;
+		
+		this.matchStatus = MatchStatus.UNMATCHED;
+	}
+	
 	public UUID getPaymentId() {
 		return paymentId;
 	}
@@ -57,6 +74,14 @@ public class Payment {
 	
 	public void setOwnerId(UUID ownerId) {
 		this.ownerId = ownerId;
+	}
+	
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+	
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
 	}
 	
 	public String getAccountNumber() {
@@ -107,10 +132,11 @@ public class Payment {
 		this.matchStatus = matchStatus;
 	}
 	
-	public void update(String remitterName, BigDecimal paymentAmount, String currency) {
+	public void update(String remitterName, BigDecimal paymentAmount, String currency, String invoiceNumber) {
 		this.remitterName = remitterName;
 		this.paymentAmount = paymentAmount;
 		this.currency = currency;
+		this.invoiceNumber = invoiceNumber;
 	}
 	
 	public void updateStatus() {

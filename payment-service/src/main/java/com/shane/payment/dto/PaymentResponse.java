@@ -14,18 +14,20 @@ public class PaymentResponse {
 	private String remitterName;
 	private BigDecimal paymentAmount;
 	private String currency;
+	private String invoiceNumber;
 	private MatchStatus matchStatus;
 	
 	public PaymentResponse() {}
 	
 	public PaymentResponse(UUID paymentId, String accountNumber, String routingNumber, String remitterName, 
-						   BigDecimal paymentAmount, String currency, MatchStatus matchStatus) {
+						   BigDecimal paymentAmount, String currency, String invoiceNumber, MatchStatus matchStatus) {
 		this.setPaymentId(paymentId);
 		this.setAccountNumber(accountNumber);
 		this.setRoutingNumber(routingNumber);
 		this.setRemitterName(remitterName);
 		this.setPaymentAmount(paymentAmount);
 		this.setCurrency(currency);
+		this.setInvoiceNumber(invoiceNumber);
 		this.setMatchStatus(matchStatus);
 	}
 
@@ -76,6 +78,14 @@ public class PaymentResponse {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+	
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+	
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
 
 	public MatchStatus getMatchStatus() {
 		return matchStatus;
@@ -93,6 +103,7 @@ public class PaymentResponse {
                 payment.getRemitterName(),
                 payment.getPaymentAmount(),
                 payment.getCurrency(),
+                payment.getInvoiceNumber(),
                 payment.getMatchStatus()
         	);
     }

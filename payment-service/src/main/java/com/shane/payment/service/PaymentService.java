@@ -22,14 +22,29 @@ public class PaymentService {
 	
 	public Payment createPayment(UUID ownerId, PaymentRequest request) {
 		
-		Payment payment = new Payment(
-				ownerId,
-				request.getAccountNumber(),
-				request.getRoutingNumber(),
-				request.getRemitterName(),
-				request.getPaymentAmount(),
-				request.getCurrency()
-				);
+		Payment payment;
+		
+		if (request.getInvoiceNumber() != null && !request.getInvoiceNumber().isEmpty()) {
+			payment = new Payment(
+					ownerId,
+					request.getAccountNumber(),
+					request.getRoutingNumber(),
+					request.getRemitterName(),
+					request.getPaymentAmount(),
+					request.getCurrency(),
+					request.getInvoiceNumber()
+					);
+		} else {
+			payment = new Payment(
+					ownerId,
+					request.getAccountNumber(),
+					request.getRoutingNumber(),
+					request.getRemitterName(),
+					request.getPaymentAmount(),
+					request.getCurrency()
+					);
+		}
+		
 		return paymentRepository.save(payment);
 		
 	}
@@ -51,7 +66,8 @@ public class PaymentService {
 		payment.update(
 				request.getRemitterName(),
 				request.getPaymentAmount(),
-				request.getCurrency()
+				request.getCurrency(),
+				request.getInvoiceNumber()
 			);
 		
 		return payment;

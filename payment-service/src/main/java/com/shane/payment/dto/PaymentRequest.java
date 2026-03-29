@@ -9,8 +9,18 @@ public class PaymentRequest {
 	private String remitterName;
 	private BigDecimal paymentAmount;
 	private String currency;
+	private String invoiceNumber;
 	
 	public PaymentRequest() {};
+	
+	public PaymentRequest(String accountNumber, String routingNumber, String remitterName, BigDecimal paymentAmount, String currency, String invoiceNumber) {
+		this.setAccountNumber(accountNumber);
+		this.setRoutingNumber(routingNumber);
+		this.setRemitterName(remitterName);
+		this.setPaymentAmount(paymentAmount);
+		this.setCurrency(currency);
+		this.setInvoiceNumber(invoiceNumber);
+	}
 	
 	public PaymentRequest(String accountNumber, String routingNumber, String remitterName, BigDecimal paymentAmount, String currency) {
 		this.setAccountNumber(accountNumber);
@@ -60,6 +70,12 @@ public class PaymentRequest {
 		this.currency = currency;
 	}
 	
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
 	
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
 
 }
